@@ -4,19 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test your Code Skillz</title>
-    <link href="./assets/style.css"/>
+    <link rel="stylesheet" href="./assets/style.css"/>
 </head>
     
 <body>
     <header>
+        <h1>Test your Code Skillz</h1>
         <button class="button">Begin</button>
     </header>
-    <div class="container"></div>
+    <div class="quiz.container">
+        <div id="question"></div>
+        <div id="answers"></div>
+    </div>
 
-    <h1 class="time" style="text-align: center;"></h1>
-    <div id="main"></div>
-
-    <section></section>
+    <div class="timer">Time: <span id="time">15</span> seconds</div>
+    <div id="game-over" class="hidden">
+        <h2>Game Over</h2>
+        <form id="scoreTally">
+            <label for="initials">Enter Initials:</label>
+            <input type="text" id="initials" name="initials" required>
+            <button type="submit">Save Score</button>
+        </form>
+    </div>
+  
     <section></section>
 
     <script src="./assets/script.js"></script>

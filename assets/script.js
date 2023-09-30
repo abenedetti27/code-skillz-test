@@ -11,10 +11,30 @@
 //when game is won, wins are incremented to scoreboard and saved to local storage
 //when game is lost, losses are incremented to scoreboard and save to local storage
 
-var timeEl = document.querySelector("time");
-var mainEl = document.getElementById("main");
+
+var questionIndex =0;
 var secondsLeft = 15;
+var counter =0;
+
+var timeEl = document.getElementById("time");
 var container = document.querySelector(".container");
+var questionEl = document.getElementById("question");
+var answersEl =document.getElementById("answers");
+var gameOver =document.getElementById("game-over");
+var initialInput =document.getElementById("initials");
+var scoreTally =document.getElementById("score-tally");
+
+
+var score= 0;
+var wins;
+var losses=0;
+
+const questions = [
+    {question: "Do you like this quiz?", answers: ["Absofreakinlutely", "I'm on the fence", "You've got to be joking"] },
+    {question: "Where does your cat sleep?", answers: ["On my pillow", "Outside", "What cat?"] },
+    {question: "What's love got to do with it?", answers: ["Everything", "Nothing", "What is love?"] }
+];
+
 
 function setTime() {
     var timerInterval = setInterval(function(){
