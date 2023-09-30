@@ -48,3 +48,26 @@ function setTime() {
     }, 1000);
 
 }
+function startQuiz() {
+    //is this the same function as setTime? 
+    displayQuestion
+
+}
+
+function displayQuestion() {
+    const question = questions[questionIndex];
+    questionEl.textContent = question.question; //question element and questtion from const question var. do i need to rename so this doesn't break?
+    answersEl.innerHTML = ""; //is this nessecary?
+    question.answers.forEach((answer)=> {
+        var button = document.createElement("button");
+        button.textContent = answer;
+        button.addEventListener("click", checkAnswer);//
+        answersEl.appendChild(button);
+    });
+}
+
+//function for comparing selected answer to correct. With if/else statement for deducting time for wrong answer?
+
+//function for updating time and ending quiz
+
+//action for save local after initials are input. event listener submit?
