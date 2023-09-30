@@ -1,0 +1,25 @@
+body {
+
+}
+
+header {
+
+}
+
+section {
+
+}
+
+.button {
+    background-color: greenyellow;
+    color:darkblue;
+    padding:10px 20px;
+    border:orchid;
+    border-radius:5px;
+    cursor:grab;
+    text-align: center;
+}
+
+.button:hover {
+    background-color: deepskyblue;
+}
