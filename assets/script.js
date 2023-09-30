@@ -10,3 +10,21 @@
 //if there is time remaining that is user score, game is over -win
 //when game is won, wins are incremented to scoreboard and saved to local storage
 //when game is lost, losses are incremented to scoreboard and save to local storage
+
+var timeEl = document.querySelector("time");
+var mainEl = document.getElementById("main");
+var secondsLeft = 15;
+var container = document.querySelector(".container");
+
+function setTime() {
+    var timerInterval = setInterval(function(){
+        secondsLeft--;
+        timeEl.textContent = secondsLeft + "Time Remaining";
+
+        if(secondsLeft === 0){
+            //save score to scoreboard local storage
+            //clear interval? message?
+        }
+    }, 1000);
+
+}

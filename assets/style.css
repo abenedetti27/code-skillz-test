@@ -23,3 +23,9 @@ section {
 .button:hover {
     background-color: deepskyblue;
 }
+
+.container {
+    border-style: outset;
+    width: 500px;
+    background-color: lavender;
+}
