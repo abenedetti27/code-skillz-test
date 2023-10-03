@@ -29,6 +29,45 @@ var score= 0;
 var wins;
 var losses=0;
 
+var question1 = {
+    question:"Do you like this quiz?",
+    answer1:"Absofreakinlutely",
+    answer2:"I'm on the fence",
+    answer3:"You've got to be joking"
+}
+var question2 = {
+    question:"Where does your cat sleep?",
+    answer1:"On my pillow",
+    answer2:"Outside",
+    answer3:"What cat?"
+}
+var question3 = {
+    question:"What's love got to do with it?",
+    answer1:"Everything",
+    answer2:"Nothing",
+    answer3:"What is love?"
+}
+var question4 = {
+    question:"Do you like this quiz?";
+    answer1:""
+    answer2:""
+    answer3:""
+}
+var question5 = {
+    question:"Do you like this quiz?";
+    answer1:""
+    answer2:""
+    answer3:""
+}
+var question6 = {
+    question:"Do you like this quiz?";
+    answer1:"Everything",
+    answer2:""
+    answer3:""
+}
+
+
+
 const questions = [
     {question: "Do you like this quiz?", answers: ["Absofreakinlutely", "I'm on the fence", "You've got to be joking"] },
     {question: "Where does your cat sleep?", answers: ["On my pillow", "Outside", "What cat?"] },
