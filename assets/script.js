@@ -69,6 +69,7 @@ function displayQuestion() {
         answersEl.appendChild(button);
     });
 }
+//function for comparing selected answer to correct. With if/else statement for deducting time for wrong answer?
 function checkAnswer(event) {
     var selectedAnswer = event.target.textContent;
     var selectedQuestion = questions[questionIndex];
@@ -79,10 +80,22 @@ function checkAnswer(event) {
         time -=15;
     }
     }
-}
-
-//function for comparing selected answer to correct. With if/else statement for deducting time for wrong answer?
 
 //function for updating time and ending quiz
+function endQuiz(){
+    clearInterval(timerInterval);
+    questionEl.textContent = "";
+    gameOverElement.classList.remove("hidden");
+}
+
+score.addEventListener("submit", (event)=> {
+    event.preventDefault();
+    var initials = intialsInput.value;
+    alert("Score saved for (initialInput)");
+    location.reload(); //will this work to reload the page to play again?
+
+});
+
+
 
 //action for save local after initials are input. event listener submit?
