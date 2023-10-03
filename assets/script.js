@@ -23,7 +23,7 @@ var questions = [
     },
     {
         question: "Where does your cat sleep?",
-        amswers: ["On my pillow", "Outside", "What cat?"],
+        answers: ["On my pillow", "Outside", "What cat?"],
         correctAnswer: 2
     } ,  
     {
@@ -74,6 +74,9 @@ function setTime() {
         if(secondsLeft === 0){
             //save score to scoreboard local storage
             //clear interval? message?
+            clearInterval(timerInterval);    
+            endQuiz();
+        
         }
     }, 1000);
 
@@ -81,106 +84,67 @@ function setTime() {
 function startQuiz() {
     //is this the same function as setTime? 
     setTime();
-    question1();
+    displayQuestion();
 
 
 }
 
 function displayQuestion() {
+    if (questionIndex < questions.length) {
+        const question = questions[questionIndex];
+        questionEl.textContent = question.question;
+
+        answersEl.innerHTML = "";
+        question.answers.forEach((answer, index) => {
+            var button = document.createElement("button");
+            button.textContent = answer;
+            button.addEventListener("click", function () {
+                checkAnswer(index);
+            });
+            answersEl.appendChild(button);
+        });
+    } else {
+        // All questions have been asked, end the game
+        endQuiz();
+    }
+}
+function checkAnswer(selectedIndex) {
     const question = questions[questionIndex];
-    questionEl.textContent = question.question; //question element and questtion from const question var. do i need to rename so this doesn't break?
-    
-    answersEl.innerHTML = ""; 
-    question.answers.forEach((answer)=> {
-        var button = document.createElement("button");
-        button.textContent = answer;
-        button.addEventListener("click", checkAnswer);//
-        answersEl.appendChild(button);
-    });
+    if (selectedIndex === question.correctAnswer) {
+        score++; // Increase score for correct answer
+    } else {
+        secondsLeft -= 5; // Deduct time for wrong answer
+    }
+
+    questionIndex++; // Move to the next question
+    displayQuestion();
 }
 //function for comparing selected answer to correct. With if/else statement for deducting time for wrong answer?
 //originally listed questions in index but couldn't debug so opted to create functions for each multiple choice q. I was inspired by an in-class activity.
 //need to add function for incorrect.
 
-function askQuestion1() {
-    container.textContent = question1.question;
-    answerA.textContent = question1.answer1;
-    answerB.textContent = question1.answer2;
-    answerC.textContent = question1.answer3;
-    optionA.addEventListener("click",askQuestion1);
-    optionB.addEventListener("click",incorrect);
-    optionC.addEventListener("click",incorrect);
-}
-
-function askQuestion2(){
-    container.textContent = question1.question;
-    answerA.textContent = question2.answer1;
-    answerB.textContent = question2.answer2;
-    answerC.textContent = question2.answer3;
-    optionA.addEventListener("click",incorrect);
-    optionB.addEventListener("click",incorrect);
-    optionC.addEventListener("click",askQuestion2);
-}
-
-function askQuestion3(){
-    container.textContent = question3.question;
-    answerA.textContent = question3.answer1;
-    answerB.textContent = question3.answer2;
-    answerC.textContent = question3.answer3;
-    optionA.addEventListener("click",askQuestion3);
-    optionB.addEventListener("click",incorrect);
-    optionC.addEventListener("click",incorrect);
-}
-
-function askQuestion4(){
-    container.textContent = question4.question;
-    answerA.textContent = question4.answer1;
-    answerB.textContent = question4.answer2;
-    answerC.textContent = question4.answer3;
-    optionA.addEventListener("click",incorrect);
-    optionB.addEventListener("click",incorrect);
-    optionC.addEventListener("click",askQuestion4);
-}
-
-function askQuestion5(){
-    container.textContent = question5.question;
-    answerA.textContent = question5.answer1;
-    answerB.textContent = question5.answer2;
-    answerC.textContent = question5.answer3;
-    optionA.addEventListener("click",incorrect);
-    optionB.addEventListener("click",askQuestion5);
-    optionC.addEventListener("click",incorrect);
-}
-
-function askQuestion6(){
-    container.textContent = question6.question;
-    answerA.textContent = question6.answer1;
-    answerB.textContent = question6.answer2;
-    answerC.textContent = question6.answer3;
-    optionA.addEventListener("click",askQuestion6);
-    optionB.addEventListener("click",incorrect);
-    optionC.addEventListener("click",incorrect);
-}
-
 
 
 //function for updating time and ending quiz
-function endQuiz(){
-    getInfo ();
-    score();
-    playAgain();
+function endQuiz() {
+    clearInterval(timerInterval);
 }
 
-function scoreTally() {
-    var initials = intialsInput.value;
-    alert("Score saved for (initialInput)");
-    localStorage.setItem(localScore),timer(); //will this work to reload the page to play again?
+function saveScore() {
+    var initials = initialInput.value;
+    alert("Score saved for " + initials);
+    localStorage.setItem("localScore", score);
+
 
 };
 
-beginButton.addEventListener("click", startQuiz);
 
-saveDate();
+scoreTallyForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    saveScore();
+});
+
+beginButton.addEventListener("click", startQuiz);
 
 
 
