@@ -10,76 +10,64 @@
 //if there is time remaining that is user score, game is over -win
 //when game is won, wins are incremented to scoreboard and saved to local storage
 //when game is lost, losses are incremented to scoreboard and save to local storage
-
-
-var questionIndex =0;
 var secondsLeft = 15;
-var counter =0;
+var timerInterval;
+var questionIndex = 0;
 
-var timeEl = document.getElementById("time");
-var container = document.querySelector(".container");
-var questionEl = document.getElementById("question");
-var answersEl =document.getElementById("answers");
-var gameOver =document.getElementById("game-over");
-var initialInput =document.getElementById("initials");
-var scoreTally =document.getElementById("score-tally");
+
+var questions = [
+    {
+        question: "Do you like this quiz?",
+        answers: ["Absofreakinlutely", "I'm on the fence", "You've got to be joking"],
+        correctAnswer: 0 
+    },
+    {
+        question: "Where does your cat sleep?",
+        amswers: ["On my pillow", "Outside", "What cat?"],
+        correctAnswer: 2
+    } ,  
+    {
+        question: "What's love got to do with it?",
+        answers: ["Everything", "Nothing", "What is love?"],
+        correctAnswer: 0
+    }  , 
+    {
+        question: "Where is the best hiding place?",
+        answers: ["Under the bed", "In the Closet", "Up a tree"],
+        correctAnswer: 2
+    },
+    {
+        question: "How do you spell Taurus?",
+        answers: ["Taurus", "Tortoise", "Tourist"],
+        correctAnswer: 1
+    },
+    {
+        question: "Can I get a window seat?",
+        answers: ["Don't want nobody next to me", "I like talking to strangers", "Can't enough of the view"],
+        correctAnswer: 0
+    }
+
+]
 
 
 var score= 0;
 var wins;
 var losses=0;
 
-var question1 = {
-    question:"Do you like this quiz?",
-    answer1:"Absofreakinlutely",
-    answer2:"I'm on the fence",
-    answer3:"You've got to be joking"
-}
-var question2 = {
-    question:"Where does your cat sleep?",
-    answer1:"On my pillow",
-    answer2:"Outside",
-    answer3:"What cat?"
-}
-var question3 = {
-    question:"What's love got to do with it?",
-    answer1:"Everything",
-    answer2:"Nothing",
-    answer3:"What is love?"
-}
-var question4 = {
-    question:"Do you like this quiz?";
-    answer1:""
-    answer2:""
-    answer3:""
-}
-var question5 = {
-    question:"Do you like this quiz?";
-    answer1:""
-    answer2:""
-    answer3:""
-}
-var question6 = {
-    question:"Do you like this quiz?";
-    answer1:"Everything",
-    answer2:""
-    answer3:""
-}
-
-
-
-const questions = [
-    {question: "Do you like this quiz?", answers: ["Absofreakinlutely", "I'm on the fence", "You've got to be joking"] },
-    {question: "Where does your cat sleep?", answers: ["On my pillow", "Outside", "What cat?"] },
-    {question: "What's love got to do with it?", answers: ["Everything", "Nothing", "What is love?"] },
-    {question: ""},
-    {question: ""},
-    {question: ""}
-];
+var timer = document.getElementById("timer");
+var beginButton = document.getElementById("begin button");
+var timeEl = document.getElementById("time");
+var container = document.querySelector(".container");
+var questionEl = document.getElementById("question");
+var answersEl = document.getElementById("answers");
+var gameOver = document.getElementById("game-over");
+var initialInput = document.getElementById("initials");
+var scoreTally = document.getElementById("score-tally");
+var localScore = localStorage.getItem("localScore");
 
 
 function setTime() {
-    var timerInterval = setInterval(function(){
+    timerInterval = setInterval(function(){
         secondsLeft--;
         timeEl.textContent = secondsLeft + "Time Remaining";
 
@@ -92,8 +80,9 @@ function setTime() {
 }
 function startQuiz() {
     //is this the same function as setTime? 
-    counter = setInterval(updateTime, 1000);
-    displayQuestion();
+    setTime();
+    question1();
+
 
 }
 
@@ -110,43 +99,88 @@ function displayQuestion() {
     });
 }
 //function for comparing selected answer to correct. With if/else statement for deducting time for wrong answer?
-function checkAnswer(event) {
-    var selectedAnswer = event.target.textContent;
-    var selectedQuestion = questions[questionIndex];
-    if (question.answers.includes(selectedAnswer)){
-        score += 15;
-    }
-    else {
-        time -=15;
-    }
+//originally listed questions in index but couldn't debug so opted to create functions for each multiple choice q. I was inspired by an in-class activity.
+//need to add function for incorrect.
 
-    questionIndex++;
-    if(questionIndex < questions.length){
-        displayQuestion();
-    }
-    else {
-        endQuiz();
-    }
+function askQuestion1() {
+    container.textContent = question1.question;
+    answerA.textContent = question1.answer1;
+    answerB.textContent = question1.answer2;
+    answerC.textContent = question1.answer3;
+    optionA.addEventListener("click",askQuestion1);
+    optionB.addEventListener("click",incorrect);
+    optionC.addEventListener("click",incorrect);
 }
+
+function askQuestion2(){
+    container.textContent = question1.question;
+    answerA.textContent = question2.answer1;
+    answerB.textContent = question2.answer2;
+    answerC.textContent = question2.answer3;
+    optionA.addEventListener("click",incorrect);
+    optionB.addEventListener("click",incorrect);
+    optionC.addEventListener("click",askQuestion2);
+}
+
+function askQuestion3(){
+    container.textContent = question3.question;
+    answerA.textContent = question3.answer1;
+    answerB.textContent = question3.answer2;
+    answerC.textContent = question3.answer3;
+    optionA.addEventListener("click",askQuestion3);
+    optionB.addEventListener("click",incorrect);
+    optionC.addEventListener("click",incorrect);
+}
+
+function askQuestion4(){
+    container.textContent = question4.question;
+    answerA.textContent = question4.answer1;
+    answerB.textContent = question4.answer2;
+    answerC.textContent = question4.answer3;
+    optionA.addEventListener("click",incorrect);
+    optionB.addEventListener("click",incorrect);
+    optionC.addEventListener("click",askQuestion4);
+}
+
+function askQuestion5(){
+    container.textContent = question5.question;
+    answerA.textContent = question5.answer1;
+    answerB.textContent = question5.answer2;
+    answerC.textContent = question5.answer3;
+    optionA.addEventListener("click",incorrect);
+    optionB.addEventListener("click",askQuestion5);
+    optionC.addEventListener("click",incorrect);
+}
+
+function askQuestion6(){
+    container.textContent = question6.question;
+    answerA.textContent = question6.answer1;
+    answerB.textContent = question6.answer2;
+    answerC.textContent = question6.answer3;
+    optionA.addEventListener("click",askQuestion6);
+    optionB.addEventListener("click",incorrect);
+    optionC.addEventListener("click",incorrect);
+}
+
 
 
 //function for updating time and ending quiz
 function endQuiz(){
-    clearInterval(counter);
-    questionEl.textContent = "";
-    gameOverEl.classList.remove("hidden");
+    getInfo ();
+    score();
+    playAgain();
 }
 
-scoreTally.addEventListener("submit", (event)=> {
-    event.preventDefault();
+function scoreTally() {
     var initials = intialsInput.value;
     alert("Score saved for (initialInput)");
-    location.reload(); //will this work to reload the page to play again?
+    localStorage.setItem(localScore),timer(); //will this work to reload the page to play again?
 
-});
+};
 
-document.getElementById("begin-button").addEventListener("click", startQuiz);
+beginButton.addEventListener("click", startQuiz);
 
+saveDate();
 
 
 
