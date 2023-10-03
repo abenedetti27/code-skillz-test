@@ -32,7 +32,10 @@ var losses=0;
 const questions = [
     {question: "Do you like this quiz?", answers: ["Absofreakinlutely", "I'm on the fence", "You've got to be joking"] },
     {question: "Where does your cat sleep?", answers: ["On my pillow", "Outside", "What cat?"] },
-    {question: "What's love got to do with it?", answers: ["Everything", "Nothing", "What is love?"] }
+    {question: "What's love got to do with it?", answers: ["Everything", "Nothing", "What is love?"] },
+    {question: ""},
+    {question: ""},
+    {question: ""}
 ];
 
 
@@ -57,6 +60,7 @@ function startQuiz() {
 function displayQuestion() {
     const question = questions[questionIndex];
     questionEl.textContent = question.question; //question element and questtion from const question var. do i need to rename so this doesn't break?
+    
     answersEl.innerHTML = ""; //is this nessecary?
     question.answers.forEach((answer)=> {
         var button = document.createElement("button");
@@ -64,6 +68,17 @@ function displayQuestion() {
         button.addEventListener("click", checkAnswer);//
         answersEl.appendChild(button);
     });
+}
+function checkAnswer(event) {
+    var selectedAnswer = event.target.textContent;
+    var selectedQuestion = questions[questionIndex];
+    if (question.answers.includes(selectedAnswer)){
+        score += 15;
+    }
+    else {
+        time -=15;
+    }
+    }
 }
 
 //function for comparing selected answer to correct. With if/else statement for deducting time for wrong answer?
