@@ -53,7 +53,8 @@ function setTime() {
 }
 function startQuiz() {
     //is this the same function as setTime? 
-    displayQuestion
+    counter = setInterval(updateTime, 1000);
+    displayQuestion();
 
 }
 
@@ -61,7 +62,7 @@ function displayQuestion() {
     const question = questions[questionIndex];
     questionEl.textContent = question.question; //question element and questtion from const question var. do i need to rename so this doesn't break?
     
-    answersEl.innerHTML = ""; //is this nessecary?
+    answersEl.innerHTML = ""; 
     question.answers.forEach((answer)=> {
         var button = document.createElement("button");
         button.textContent = answer;
@@ -79,22 +80,35 @@ function checkAnswer(event) {
     else {
         time -=15;
     }
+
+    questionIndex++;
+    if(questionIndex < questions.length){
+        displayQuestion();
     }
+    else {
+        endQuiz();
+    }
+}
+
 
 //function for updating time and ending quiz
 function endQuiz(){
-    clearInterval(timerInterval);
+    clearInterval(counter);
     questionEl.textContent = "";
-    gameOverElement.classList.remove("hidden");
+    gameOverEl.classList.remove("hidden");
 }
 
-score.addEventListener("submit", (event)=> {
+scoreTally.addEventListener("submit", (event)=> {
     event.preventDefault();
     var initials = intialsInput.value;
     alert("Score saved for (initialInput)");
     location.reload(); //will this work to reload the page to play again?
 
 });
+
+document.getElementById("begin-button").addEventListener("click", startQuiz);
+
+
 
 
 
