@@ -12,7 +12,7 @@
 
 ## Description 
 
-[Visit the Deployed Site](https://abenedetti27.github.io/cpde-skillz-test/)
+[Visit the Deployed Site](https://abenedetti27.github.io/code-skillz-test/)
 
 
 The goal of this project was to build a times quiz with multiple choice answers. The functionality was to have the page change to the next question once a quesiton is answered. If the question was answered incorrectly, it would deduct 5 seconds from the timer. The final time on the timer is the score. The score is to be saved locally. 
